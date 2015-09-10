@@ -8,17 +8,17 @@ def working_directory(path):
     current_dir = os.getcwd()
     os.chdir(path)
 
-    # return "123"
     try:
-        yield  # !
+        yield  # 123 這行表示return 123 給 as 後面的變數
 
-    # except:
+    except RuntimeError, err:
+        print 'error', err
 
     finally:
         os.chdir(current_dir)
 
 
-with working_directory("data/stuff"):
+with working_directory("data/stuff"):  # 同樣可以有as
     pass
     # do something within data/stuff
 # here I am back again in the original working director
@@ -29,7 +29,6 @@ def working_directory(path):
     current_dir = os.getcwd()
     os.chdir(path)
 
-    # return "123"
     try:
 而到了 yield
 才會回去執行pass部分
