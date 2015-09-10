@@ -21,6 +21,9 @@ with Sample() as sample:
     if sample:
         do_something()
 
+# "as" state is not must required, it can write:
+# with Sample():
+
 print "yy"
 print "yy"
 print "yy"
