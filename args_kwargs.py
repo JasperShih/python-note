@@ -2,22 +2,23 @@
 __author__ = 'Jasper'
 
 """
-args(arguments)接收參數串(長度不定;除字典型態參數外)
-kwargs(key word arguments)接收字典型態的參數串(長度不定)
-args, kwargs就是引數名稱, 這些名子是可以改的(就是一般引數)
-用args, kwargs只不過是約定俗成的用法
+*var : unpack完之後的var等於傳進來的arg1, arg2...(key=value sequence除外)
+所以var(未unpack) = (arg1, arg2...)  #只會加tuple的外框
+**var :unpack完之後的var等於傳進來的key1 = value1, key2 = value2... sequence
+所以var(未unpack) = {key1 = value1, key2 = value2...}
+
+
+
+*args, **kwargs中的args, kwargs就只是一般的引數名稱, 這些名子是可以改的
+用args (arguments), kwargs (keyword arguments)只不過是約定俗成的用法
 
 """
-
-
 def show(*args, **kwargs):
     print args
     print kwargs
 
 
 """
-args接收參數串後, 會把參數串存成tuple型態
-kwargs接收參數串後, 會把參數串存成dict型態
 eg:
 show(1,2,3,k=1,g=2)
 =>
@@ -51,8 +52,8 @@ dict_b = {'f': 123456,
           'm': 488}
 
 """
-在function call的arguments中, 將一個*加在python的data structure前,
-則會將其data structure解開, 並裡面的各個element傳到callee去.
+在function call的arguments中, *是unpacking sign,將一個*加在python的data structure前,
+則會將其data structure解開, 並將裡面的各個element傳到callee去.
 
 如
 show(tuple_a) = show((1,2,3,4,5))
@@ -82,10 +83,10 @@ display(f = 123456, j = 321, k = 9526, l = 7755, m = 488)
 display(**dict_a) 就會正確了
 
 
-所以在caller時, *號表示將data structure解開的意思(其elements傳出是有序的);
+*號表示將data structure解開的意思(其elements傳出是有序的);
 dict 比較特別, *解開並只傳出key值(其elements傳出是亂序的),
-**才是傳出各elements, i.e. key1:value1, key2:value2 ......
-也就是說在caller時, *號可視為把data structure外面那一層框拔掉的意思
+**才是傳出各elements, i.e. key1:value1, key2:value2 ......(也是亂序),
+*號可視為把data structure外面那一層框拔掉的意思
 
 
 show(1,2,3,4,5)
@@ -99,16 +100,23 @@ show(a=3,b=2, c=8, d=78, e=0)
 {'a': 3, 'c': 8, 'b': 2, 'e': 0, 'd': 78}
 
 
+示意:
+caller: show(1,2,3,4,5)
 
-而在callee時, 我們可以視*是加框的意思, 把收到的各elements加上一個會形成data structure
-的外框(在這裡*args收到的elements, 只會加tuple外框, 而**kwargs收到的引數, 是加字典的外框)
+callee: show(*args)
+這裡我們可以看到 *arg = 1,2,3,4,5
+拔掉外框的arg = 1,2,3,4,5
+所以原來的arg = (1,2,3,4,5)
+
+
+在這裡*args收到的elements, 只會加tuple外框, 而**kwargs收到的引數, 是加字典的外框
 
 """
 
 
 """
 args = args + ('yo', 'cc')
-既然是tuple, 所以也可以對args對增加刪減,然後再傳出的動作
+既然只是tuple而已, 那麼當然也可以對args對增加刪減,然後再傳出的動作
 
 
 def show(a, b, *args, **kwargs):
