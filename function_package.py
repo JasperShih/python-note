@@ -91,3 +91,69 @@ def checker(func):
 check_click = checker(click)
 
 check_click(5)
+
+
+
+# 以自己封裝sikuli的函式為例===================================
+
+def wrap(original_function, sleep_time):
+
+    def new_function(*args, **kwargs):
+        try:
+            #執行原來的function
+            original_function(*args, **kwargs)
+        except:
+            #如果找不到圖片, 做例外處理
+            pass
+
+    #命令執行完的等待時間
+    sleep(sleep_time)
+    return new_function
+
+
+
+CLICK_SLEEP_TIME = 5
+TYPE_SLEEP_TIME = 2
+DRAG_DROP_SLEEP_TIME = 2
+
+#套成新function
+new_click = wrap(click, CLICK_SLEEP_TIME)
+new_type = wrap(type, TYPE_SLEEP_TIME)
+new_dragDrop = wrap(dragDrop, DRAG_DROP_SLEEP_TIME)
+
+
+#以後若希望不拋出except, 就用下面指令
+new_click("1441986043140.png")
+new_click("1441986043140.png")
+new_type("1441989903669.png", "123")
+new_dragDrop("1441989997488.png", "1441989998610.png")
+
+
+
+
+# 讓click不到, 再去catch exception做處理
+# 與確認exist or not, 再去做click是不是一樣?
+
+#=========================================================================
+
+
+def check(original_function, sleep_time):
+
+    def new_function(*args, **kwargs):
+        execute = True
+        if args[0][-4:] == ".png":
+            execute = exists(args[0])
+
+        if execute:
+            try:
+                original_function(*args, **kwargs)
+            except:
+                pass
+        else:
+            print "does not exist"
+
+        sleep(sleep_time)
+
+    return new_function
+
+
