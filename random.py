@@ -22,11 +22,6 @@ agents = ["Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) C
 random.choice(agents)
 
 
-隨機整數：
->>> import random
->>> random.randint(0,99)
-21
-
 隨機選取0到100間的偶數：
 >>> import random
 >>> random.randrange(0, 101, 2)
