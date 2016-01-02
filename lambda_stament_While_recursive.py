@@ -23,3 +23,52 @@ python的lambda不允許assign操作, 因為他們認為函數式編程是不應
 我原本想寫成第2種簡潔的語法, 無奈無法assign, 只好回到第1種, 
 因為實在不想寫成第3種
 """
+
+
+def locate_on_arena2(self, creature, character):
+        spawn = False
+        while spawn is False:
+            random_x = random.randrange(0, self.arena.x_limit)
+            random_y = random.randrange(0, self.arena.y_limit)
+            spawn_location = self.arena.array[random_x][random_y]
+            if spawn_location == '_':
+                spawn_location = character
+                spawn = True
+				
+
+				
+def get_action(self):
+        action_buffer = None
+        while Player.is_not_valid_action(action_buffer):
+            print "Input valid action:"
+            action_buffer = msvcrt.getch()
+        self.action = action_buffer
+
+
+def get_action2(self):
+	action_buffer = None
+	if Player.is_not_valid_action(action_buffer):
+		self.action = action_buffer
+	else:
+		self.get_action2()				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
